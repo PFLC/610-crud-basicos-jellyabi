@@ -65,3 +65,115 @@ Esta aplicación es una demostración básica y no implementa medidas avanzadas 
 
 Siéntete libre de contribuir a este proyecto o sugerir mejoras. Para cualquier consulta o problema, por favor abre un issue en este repositorio.
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+INVESTIGACION RIOS CARLOS ISIS ABIGAIL 610
+
+Un sistema CRUD se refiere a un sistema informático que realiza cuatro funciones básicas: Crear, Leer, Actualizar y Borrar (Create, Read, Update, Delete). Los formularios que forman parte de un sistema CRUD estarían diseñados para interactuar con una base de datos y realizar estas operaciones. Aquí hay una descripción de los formularios típicos que podrían formar parte de un sistema CRUD:
+
+Formulario de Creación: Este formulario permite a los usuarios ingresar nueva información en la base de datos. Por lo general, incluye campos para cada atributo o dato que se necesita almacenar y un botón para enviar la información al sistema.
+
+Formulario de Lectura: Este formulario permite a los usuarios ver los datos existentes en la base de datos. Puede mostrar los datos en forma de lista, tabla u otro formato adecuado. Por lo general, no permite la edición directa de los datos.
+
+Formulario de Actualización: Este formulario permite a los usuarios modificar los datos existentes en la base de datos. Presenta los datos actuales en campos editables que los usuarios pueden cambiar según sea necesario. Incluye un botón para enviar los cambios al sistema.
+
+Formulario de Eliminación: Este formulario permite a los usuarios eliminar datos existentes de la base de datos. Puede incluir una lista de elementos disponibles para eliminar, junto con un botón de confirmación para completar la acción.
+
+Además de estos formularios básicos, un sistema CRUD también puede incluir otros elementos de interfaz de usuario, como mensajes de confirmación, validación de datos, paginación o filtros para facilitar la gestión de datos. Estos formularios son esenciales para permitir a los usuarios interactuar de manera efectiva con la base de datos y realizar operaciones CRUD de manera segura y eficiente.
+
+Aquí tienes un ejemplo básico de cómo podrías implementar un CRUD de contactos utilizando un lenguaje de programación como Python y un sistema de gestión de bases de datos relacional como SQLite. Este ejemplo utiliza una aplicación de consola simple:
+
+import sqlite3
+
+# Función para crear la tabla de contactos
+def create_table():
+    conn = sqlite3.connect('contactos.db')
+    c = conn.cursor()
+    c.execute('''CREATE TABLE IF NOT EXISTS contactos
+                 (id INTEGER PRIMARY KEY, nombre TEXT, telefono TEXT, email TEXT)''')
+    conn.commit()
+    conn.close()
+
+# Función para insertar un nuevo contacto
+def insert_contact(nombre, telefono, email):
+    conn = sqlite3.connect('contactos.db')
+    c = conn.cursor()
+    c.execute("INSERT INTO contactos (nombre, telefono, email) VALUES (?, ?, ?)", (nombre, telefono, email))
+    conn.commit()
+    conn.close()
+
+# Función para mostrar todos los contactos
+def show_contacts():
+    conn = sqlite3.connect('contactos.db')
+    c = conn.cursor()
+    c.execute("SELECT * FROM contactos")
+    rows = c.fetchall()
+    for row in rows:
+        print(row)
+    conn.close()
+
+# Función para actualizar un contacto existente
+def update_contact(id, nombre, telefono, email):
+    conn = sqlite3.connect('contactos.db')
+    c = conn.cursor()
+    c.execute("UPDATE contactos SET nombre=?, telefono=?, email=? WHERE id=?", (nombre, telefono, email, id))
+    conn.commit()
+    conn.close()
+
+# Función para eliminar un contacto
+def delete_contact(id):
+    conn = sqlite3.connect('contactos.db')
+    c = conn.cursor()
+    c.execute("DELETE FROM contactos WHERE id=?", (id,))
+    conn.commit()
+    conn.close()
+
+# Función principal para ejecutar la aplicación de consola
+def main():
+    create_table()
+    while True:
+        print("\nSelecciona una opción:")
+        print("1. Agregar contacto")
+        print("2. Mostrar contactos")
+        print("3. Actualizar contacto")
+        print("4. Eliminar contacto")
+        print("5. Salir")
+        opcion = input("Opción: ")
+
+        if opcion == "1":
+            nombre = input("Nombre: ")
+            telefono = input("Teléfono: ")
+            email = input("Email: ")
+            insert_contact(nombre, telefono, email)
+            print("Contacto agregado exitosamente.")
+
+        elif opcion == "2":
+            print("\nListado de contactos:")
+            show_contacts()
+
+        elif opcion == "3":
+            id = input("ID del contacto a actualizar: ")
+            nombre = input("Nuevo nombre: ")
+            telefono = input("Nuevo teléfono: ")
+            email = input("Nuevo email: ")
+            update_contact(id, nombre, telefono, email)
+            print("Contacto actualizado exitosamente.")
+
+        elif opcion == "4":
+            id = input("ID del contacto a eliminar: ")
+            delete_contact(id)
+            print("Contacto eliminado exitosamente.")
+
+        elif opcion == "5":
+            print("¡Hasta luego!")
+            break
+
+        else:
+            print("Opción inválida. Por favor, selecciona una opción válida.")
+
+if __name__ == "__main__":
+    main()
+
+
+
+
