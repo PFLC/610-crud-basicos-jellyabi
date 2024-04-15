@@ -67,7 +67,7 @@ Siéntete libre de contribuir a este proyecto o sugerir mejoras. Para cualquier 
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-INVESTIGACION
+INVESTIGACION RIOS CARLOS ISIS ABIGAIL 610
 
 Un sistema CRUD se refiere a un sistema informático que realiza cuatro funciones básicas: Crear, Leer, Actualizar y Borrar (Create, Read, Update, Delete). Los formularios que forman parte de un sistema CRUD estarían diseñados para interactuar con una base de datos y realizar estas operaciones. Aquí hay una descripción de los formularios típicos que podrían formar parte de un sistema CRUD:
 
